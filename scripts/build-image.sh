@@ -11,13 +11,16 @@ if ! command -v pnpm >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "[1/3] Build Angular -> dist/"
+echo "[1/4] Build Angular -> dist/"
 pnpm run build -- --configuration production
 
-echo "[2/3] Verify dist exists"
+echo "[2/4] Verify dist exists"
 test -f dist/angular-k8s-demo/index.html
 
-echo "[3/3] Build Docker image: ${IMAGE_TAG}"
+echo "[3/4] Build Docker image: ${IMAGE_TAG}"
+docker build -t "${IMAGE_TAG}" .
+
+echo "[4/4] Build Docker image: ${IMAGE_TAG}"
 docker build -t "${IMAGE_TAG}" .
 
 echo "Done."

@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  DOCKER_IMAGE: dockerhub.qingcloud.com/luanying/angular-realworld-example-app
+  DOCKER_IMAGE: oneness/angular-realworld-example-app
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
