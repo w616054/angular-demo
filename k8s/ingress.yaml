@@ -17,3 +17,5 @@ spec:
                 name: angular-k8s-demo
                 port:
                   number: 80
+
+# NOTE: This file is only a demo; TLS secret configuration is omitted.
