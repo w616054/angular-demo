@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-k8s-demo
+  labels:
+    app: angular-k8s-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: angular-k8s-demo
+  template:
+    metadata:
+      labels:
+        app: angular-k8s-demo
+    spec:
+      imagePullSecrets:
+        - name: qingcloud-registry-secret
+      containers:
+        - name: angular-k8s-demo
+          image: dockerhub.qingcloud.com/luanying/angular-realworld-example-app:latest     
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
